@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<body>
+    <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
+</body>
+
+<script>
+ const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width *= dpr, canvas.height *= dpr;
+    ctx.scale(dpr, dpr);
+
+    ctx.fillStyle = "black"
+    ctx.fillRect(0, 0, w, h);
+
+for(let i = 0; i <= 256; i++){
+let xPos = Math.random() * w;
+let yPos = Math.random() * h;
+    ctx.beginPath();
+ctx.arc(
+	xPos, // x-position coordinate
+	yPos, // y-position coordinate
+	Math.random() * 20, // radius of circle
+	0, // starting angle
+	Math.PI * 2, // ending angle
+	false // clockwise or not 
+);
+let yPosAbove = yPos >= 300;
+
+if(yPosAbove){
+    ctx.fillStyle = "red"
+} else {
+    ctx.fillStyle = "white"
+}
+ctx.fill() // render the circle
+    }
+    
+
+
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<body>
+    <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
+</body>
+
+<script>
+ const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width *= dpr, canvas.height *= dpr;
+    ctx.scale(dpr, dpr);
+
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, w, h);
+
+let numCircle = prompt("How many circles?");
+const maxRadius = w * 0.45;
+const radiusIncr = maxRadius / numCircle;
+
+const colors = [
+	"#EF998D",
+	"#F0AA75",
+	"#EEBB61",
+	"#E8776B",
+	"#E678B2",
+	"#C184D1",
+	"#77B1B6",
+	"#65D0A0",
+	"#66D69E"
+];
+
+for(let i = 0; i < numCircle; i++){
+let radius = radiusIncr * (i + 1);
+    ctx.beginPath();
+ctx.arc(
+	300, // x-position coordinate
+	300, // y-position coordinate
+	radius, // radius of circle
+	0, // starting angle
+	Math.PI * 2, // ending angle
+	false // clockwise or not 
+);
+     ctx.lineWidth = 4;       
+        ctx.lineWidth = "pointed";
+       ctx.strokeStyle = colors[(i) % 9]
+        ctx.stroke();
+};
+
+
+</script>
