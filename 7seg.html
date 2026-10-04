@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<body>
+    <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
+</body>
+
+<button onclick = "onClick()">get ur typin fingers ready</button>
+
+<input type="color">
+
+
+<script>
+ const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width *= dpr, canvas.height *= dpr;
+    ctx.scale(dpr, dpr);
+
+    ctx.fillStyle = "black"
+    ctx.fillRect(0, 0, w, h);
+
+
+function onClick(){
+let numberOfClicks = 0
+numberOfClicks++
+if(numberOfClicks%2){ //resets canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "black"
+    ctx.fillRect(0, 0, w, h);
+}
+
+let whatToWrite = prompt("Write a word");
+const charArray = whatToWrite.split("");
+const spaceWidth= 40
+const offset = 20
+const segmentOffset = 5
+
+letterPlacer(20)
+
+
+function letterPlacer(spaceWidth){
+    
+    let letterWidth = (w * 0.95)/(charArray.length) - spaceWidth;
+
+   
+   
+    for(i = 0; i < charArray.length; i++){
+        let segmentTrue = letterSegment(charArray[i])
+        writeLetter(segmentTrue, i*letterWidth+offset+(i*spaceWidth), 0+offset, letterWidth)
+
+}
+}
+
+
+
+function letterSegment(letter, letterX, letterY, letterWidth){
+if (letter == " "){
+    return segmentTrue = [0, 0, 0, 0, 0, 0, 0]
+} else if (letter == "a"){
+    return segmentTrue = [1, 1, 1, 1, 1, 1, 0]
+} else if (letter == "b"){
+    return segmentTrue = [0, 1, 0, 1, 1, 1, 1]
+} else if (letter == "c"){
+    return segmentTrue = [1, 1, 0, 0, 1, 0, 1]
+} else if (letter == "d"){
+    return segmentTrue = [0, 0, 1, 1, 1, 1, 1]
+} else if (letter == "e"){
+    return segmentTrue = [1, 1, 0, 1, 1, 0, 1]
+} else if (letter == "f"){
+    return segmentTrue = [1, 1, 0, 1, 1, 0, 0]
+} else if (letter == "g"){
+    return segmentTrue = [1, 1, 1, 1, 0, 1, 1]
+} else if (letter == "h"){
+    return segmentTrue = [0, 1, 0, 1, 1, 1, 0]
+} else if (letter == "i"){
+    return segmentTrue = [0, 1, 0, 0, 1, 0, 0]
+} else if (letter == "j"){
+    return segmentTrue = [0, 0, 1, 0, 0, 1, 1]
+} else if (letter == "k"){
+    return segmentTrue = [1, 1, 0, 1, 1, 1, 0]
+} else if (letter == "l"){
+    return segmentTrue = [0, 1, 0, 0, 1, 0, 1]
+} else if (letter == "m"){
+    return segmentTrue = [1, 0, 0, 0, 1, 1, 0]
+} else if (letter == "n"){
+    return segmentTrue = [1, 1, 1, 0, 1, 1, 0]
+} else if (letter == "o"){
+    return segmentTrue = [0, 0, 0, 1, 1, 1, 1]
+} else if (letter == "p"){
+    return segmentTrue = [1, 1, 1, 1, 1, 0, 0]
+} else if (letter == "q"){
+    return segmentTrue = [1, 1, 1, 1, 0, 1, 0]
+} else if (letter == "r"){
+    return segmentTrue = [0, 0, 0, 1, 1, 0, 0]
+} else if (letter == "s"){
+    return segmentTrue = [1, 1, 0, 1, 0, 1, 1]
+} else if (letter == "t"){
+    return segmentTrue = [0, 1, 0, 1, 1, 0, 1]
+} else if (letter == "u"){
+    return segmentTrue = [0, 1, 1, 0, 1, 1, 1]
+} else if (letter == "v"){
+    return segmentTrue = [0, 1, 1, 1, 0, 0, 0]
+} else if (letter == "w"){
+    return segmentTrue = [0, 1, 1, 0, 0, 0, 1]
+} else if (letter == "x"){
+    return segmentTrue = [0, 1, 1, 1, 1, 1, 0]
+} else if (letter == "y"){
+    return segmentTrue = [0, 1, 1, 1, 0, 1, 1]
+} else if (letter == "z"){
+    return segmentTrue = [1, 0, 1, 1, 1, 0, 1]
+} else if (letter == "1"){
+    return segmentTrue = [0, 0, 1, 0, 0, 1, 0]
+} else if (letter == "2"){
+    return segmentTrue = [1, 0, 1, 1, 1, 0, 1]
+
+} else {
+    console.log("it got fucked")
+}
+
+
+}
+
+
+function writeLetter(segmentTrue, letterX, letterY, letterWidth){
+let letterHeight = letterWidth
+ctx.lineCap = "round"
+ctx.lineWidth = 4;
+if(segmentTrue[0]){
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY);
+    ctx.lineTo(letterX+segmentOffset, letterY);
+    ctx.lineTo(letterX+letterWidth-segmentOffset, letterY)
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}
+else{
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY);
+    ctx.lineTo(letterX+segmentOffset, letterY);
+    ctx.lineTo(letterX+letterWidth-segmentOffset, letterY)
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[1]){
+    ctx.beginPath();
+    ctx.moveTo(letterX, letterY+segmentOffset);
+    ctx.lineTo(letterX, letterY+segmentOffset);
+    ctx.lineTo(letterX, letterY+(0.5*letterHeight-segmentOffset))
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}else{
+    ctx.beginPath();
+    ctx.moveTo(letterX, letterY+segmentOffset);
+    ctx.lineTo(letterX, letterY+segmentOffset);
+    ctx.lineTo(letterX, letterY+(0.5*letterHeight-segmentOffset))
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[2]){
+    ctx.beginPath();
+    ctx.moveTo(letterX+letterWidth, letterY+segmentOffset);
+    ctx.lineTo(letterX+letterWidth, letterY+segmentOffset);
+    ctx.lineTo(letterX+letterWidth, letterY+(0.5*letterHeight-segmentOffset))
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}else{
+    ctx.beginPath();
+    ctx.moveTo(letterX+letterWidth, letterY+segmentOffset);
+    ctx.lineTo(letterX+letterWidth, letterY+segmentOffset);
+    ctx.lineTo(letterX+letterWidth, letterY+(0.5*letterHeight-segmentOffset))
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[3]){
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.lineTo(letterX+segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.lineTo(letterX+letterWidth-segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}else{
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.lineTo(letterX+segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.lineTo(letterX+letterWidth-segmentOffset, letterY+(0.5 * letterHeight));
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[4]){
+    ctx.beginPath();
+    ctx.moveTo(letterX, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX, letterY+letterHeight-segmentOffset)
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}else{
+    ctx.beginPath();
+    ctx.moveTo(letterX, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX, letterY+letterHeight-segmentOffset)
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[5]){
+    ctx.beginPath();
+    ctx.moveTo(letterX+letterWidth, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX+letterWidth, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX+letterWidth, letterY+letterHeight - segmentOffset)
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+} else {
+    ctx.beginPath();
+    ctx.moveTo(letterX+letterWidth, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX+letterWidth, letterY+(segmentOffset+ letterHeight * 0.5));
+    ctx.lineTo(letterX+letterWidth, letterY+letterHeight - segmentOffset)
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+if(segmentTrue[6]){
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY+letterHeight);
+    ctx.lineTo(letterX+segmentOffset, letterY+letterHeight);
+    ctx.lineTo(letterX+letterWidth - segmentOffset, letterY+letterHeight)
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+}else{
+    ctx.beginPath();
+    ctx.moveTo(letterX+segmentOffset, letterY+letterHeight);
+    ctx.lineTo(letterX+segmentOffset, letterY+letterHeight);
+    ctx.lineTo(letterX+letterWidth - segmentOffset, letterY+letterHeight)
+    ctx.strokeStyle = "DarkSlateGray"
+    ctx.stroke()
+}
+}
+}
+
+
+
+//mayb make it 14 or 16 segments so u can read it
+
+
+
+
+
+</script>
