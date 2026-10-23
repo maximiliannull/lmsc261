@@ -9,6 +9,8 @@
 
 
 <script>
+
+// MAKE IT SO ALL THE ELEMENTS SCALE WITH THE CANVAS SIZE, like the spaces and stuff, use width and height
  const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const w = canvas.width, h = canvas.height;
@@ -39,19 +41,20 @@ const segmentOffset = 5
 letterPlacer(20)
 
 
-
 function letterPlacer(spaceWidth){
     
-
-
     let letterWidth = (w * 0.95)/(charArray.length) - spaceWidth;
 
-        for(i = 0; i < charArray.length - (j+charArray.length); i++){
-            let segmentTrue = letterSegment(charArray[i])
-            writeLetter(segmentTrue, i*letterWidth+offset+(i*spaceWidth), 0+offset, letterWidth)
+   
+   
+    for(i = 0; i < charArray.length; i++){
+        let segmentTrue = letterSegment(charArray[i])
+        writeLetter(segmentTrue, i*letterWidth+offset+(i*spaceWidth), 0+offset, letterWidth)
 
 }
 }
+
+
 
 function letterSegment(letter, letterX, letterY, letterWidth){
 if (letter == " "){
@@ -237,8 +240,6 @@ if(segmentTrue[6]){
 
 
 //mayb make it 14 or 16 segments so u can read it
-// or could make it so that it animates in, writing each letter
-//have the segments tweak out and then settle on the letter
 
 
 
